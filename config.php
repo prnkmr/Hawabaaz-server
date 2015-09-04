@@ -38,10 +38,10 @@ class config
             103 => "invalid phone number"
         );
 
-        $this->appdata = array();
+        $this->appdata = array(
 
+        );
 
-        echo "runing";
 
     }
 

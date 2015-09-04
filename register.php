@@ -1,6 +1,6 @@
 <?php
 require_once("praveen.php");
-$keys=array("phone","email","password","rePassword");
+$keys=array("phone","email");
 $respjson= array(
     "status"=>"unprocessed",
     "errorCode"=>1
@@ -11,17 +11,12 @@ if($prn->checkPOST($keys)){
     if($conn){
         $phone=$prn->safePost('phone');
         $email=$prn->safePost('email');
-        $password=$prn->safePost('password');
-        $rePassword=$prn->safePost('rePassword');
         if(is_numeric($phone)) {
-
-
-            if ($password == $rePassword) {
-
                 $sql = "select (id) from registered_users where phone='$phone' or email='$email' limit 1";
                 if ($result = $prn->query($sql)) {
                     $userCount = $result->num_rows;
                     if ($userCount == 0) {
+                        $password=$prn->generateRandomString(8);
                         if ($phone == "")
                             $sql = "insert into hawabaaz.registered_users(email, password) values ('$email','$password')";
                         else if ($email == "") $sql = "insert into hawabaaz.registered_users(email,password) values ('$phone','$password')";
@@ -45,21 +40,21 @@ if($prn->checkPOST($keys)){
                     $respjson["SqlError"] = $conn->error;
                     $respjson["errorCode"] = 4;
                 }
-            } else {
-                $respjson["status"] = "Password Mismatch";
-                $respjson["errorCode"] = 102;
-            }
+
         }else{
             $respjson["status"] = "Invalid Phone number";
             $respjson["errorCode"] = 103;
         }
     }else{
-        $respjson["status"]="SQL Connection error";
-        $respjson["SqlError"]=$conn->error;
+        if($prn->debug) {
+            $respjson["status"] = "SQL Connection error";
+            $respjson["SqlError"] = $conn->error;
+        }
         $respjson["errorCode"]=3;
     }
 }else{
     $respjson["status"]="insufficient Data";
+    $respjson['missKey']=$prn->error;
     $respjson["errorCode"]=2;
 }
 
