@@ -16,20 +16,25 @@ $sql="select id,name from hawabaaz.available_locations";
 
      }
      $respjson['errorCode']=0;
-     $respjson['status']="success";
-
- }else{
-
-     $respjson["status"] = "SQL querry error";
-     $respjson["SqlError"] = $conn->error;
+     if($sk->debug) {
+         $respjson['status'] = "success";
+     }
+ }else {
+     if($sk->debug){
+         $respjson["status"] = "SQL querry error";
+         $respjson["SqlError"] = $con->error;
+ }
      $respjson["errorCode"] = 4;
  }
 
 
 }else{
+    if($sk->debug){
     $respjson["status"] = "SQL Connection error";
-    $respjson["SqlError"] = $conn->error;
+    $respjson["SqlError"] = $con->error;
+    }
     $respjson["errorCode"] = 3;
 
 }
+echo json_encode($respjson);
 ?>
