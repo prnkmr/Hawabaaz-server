@@ -20,7 +20,8 @@ if($sk->checkPOST($keys)) {
         if ($result = $sk->query($sql)) {
             $usercount = $result->num_rows;
             if ($usercount == 1) {
-                $sql="update  hawabaaz.registered_users set password='{$password}' where id='{$userId}' ";
+
+                $sql="update  hawabaaz.registered_users set password='{$password}', verified=1  where id='{$userId}' ";
                 $sk->query($sql);
             } else {
                 $respjson["status"]="Authentication Failure";
