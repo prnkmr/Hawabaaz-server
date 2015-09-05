@@ -1,57 +1,46 @@
 <?php
 require_once("praveen.php");
 
-$respjson= array(
+$resp= array(
     "status"=>"unprocessed",
     "errorCode"=>1
 
 );
 $keys=array("username","password");
-$sk = new praveen();
-if($sk->checkPOST($keys)){
-$con=$sk->getConnection();
+$prn = new praveen();
+if($prn->checkPOST($keys)){
+$con=$prn->getConnection();
     if($con){
-        $uname=$sk->safePost("username");
-        $pass=$sk->safePost("password");
-        $sql="select id,verified from registered_users WHERE( phone or email ='{$uname}') and (password or temporary_password ='{$pass}' )limit 1";
-        if($result=$sk->query($sql)){
+        $username=$prn->safePost("username");
+        $password=$prn->safePost("password");
+        $sql="select id from registered_users WHERE( phone='$username' or email ='$username') and (password='$password' )limit 1";
+        if($result=$prn->query($sql)){
             $usercount=$result->num_rows;
             if($usercount==1){
                 $row=$result->fetch_array();
-                if($row['verified']==1){
-                    $respjson['userid']= $row['id'];
-                    $respjson["status"] = "success";
-                    $respjson["errorCode"] = 0;
-
-                }else{
-                    $respjson["status"] = "OTP Not Verified";
-                    $respjson["errorCode"] = 104;
-
-                }
-
+                    $resp['userid']= $row['id'];
+                    $resp["status"] = "success";
+                    $resp["errorCode"] = 0;
             }else{
-                $respjson["status"] = "Authentication Failure";
-                $respjson["errorCode"] = 5;
-
+                $resp["status"] = "Authentication Failure";
+                $resp["errorCode"] = 5;
             }
         }else{
-
-            $respjson["status"] = "SQL error";
-            $respjson["SqlError"] = $conn->error;
-            $respjson["errorCode"] = 4;
+            $resp["status"] = "SQL error";
+            $resp["SqlError"] = $conn->error;
+            $resp["errorCode"] = 4;
         }
     }else{
 
-        $respjson["status"] = "SQL Connection error";
-        $respjson["SqlError"] = $conn->error;
-        $respjson["errorCode"] = 3;
-
-
+        $resp["status"] = "SQL Connection error";
+        $resp["SqlError"] = $conn->error;
+        $resp["errorCode"] = 3;
     }
 }else{
-    $respjson["status"]="insufficient Data";
-    $respjson["missKey"]=$sk->error;
-    $respjson["errorCode"]=2;
+    $resp["status"]="insufficient Data";
+    $resp["missKey"]=$prn->error;
+    $resp["errorCode"]=2;
 }
 
+echo json_encode($resp);
 ?>

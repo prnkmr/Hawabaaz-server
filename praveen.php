@@ -48,7 +48,7 @@ class praveen extends config
 
     protected function safeString($connection, $string)
     {
-        return mysqli_real_escape_string($connection, stripcslashes($string));
+        return mysqli_real_escape_string($connection, $string);
     }
 
     public function safePost($string)

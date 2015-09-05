@@ -1,11 +1,13 @@
 <?php
 require_once("praveen.php");
 $keys=array("phone","email");
-$respjson= array(
-    "status"=>"unprocessed",
+$prn=new praveen();
+$resp= array(
     "errorCode"=>1
 );
-$prn=new praveen();
+
+if($prn->debug){
+    $resp["status"]="unprocessed"; }
 if($prn->checkPOST($keys)){
     $conn=$prn->getConnection();
     if($conn){
@@ -23,39 +25,44 @@ if($prn->checkPOST($keys)){
                         else $sql = "insert into hawabaaz.registered_users(phone, email, password) values ('$phone','$email','$password')";
                         $result = $prn->query($sql);
                         if ($result) {
-                            $respjson["status"] = "Success";
-                            $respjson["errorCode"] = 0;
+                            if($prn->debug){
+                            $resp["status"] = "Success";}
+                            $resp["errorCode"] = 0;
                         } else {
-
-                            $respjson["status"] = "SQL error";
-                            $respjson["SqlError"] = $conn->error;
-                            $respjson["errorCode"] = 4;
+                            if($prn->debug){
+                            $resp["status"] = "SQL error";
+                            $resp["SqlError"] = $conn->error; }
+                            $resp["errorCode"] = 4;
                         }
                     } else {
-                        $respjson["status"] = "Already registered";
-                        $respjson["errorCode"] = 101;
+                        if($prn->debug){
+                        $resp["status"] = "Already registered"; }
+                        $resp["errorCode"] = 101;
                     }
                 } else {
-                    $respjson["status"] = "SQL error";
-                    $respjson["SqlError"] = $conn->error;
-                    $respjson["errorCode"] = 4;
+                    if($prn->debug){
+                    $resp["status"] = "SQL error";
+                    $resp["SqlError"] = $conn->error;}
+                    $resp["errorCode"] = 4;
                 }
 
         }else{
-            $respjson["status"] = "Invalid Phone number";
-            $respjson["errorCode"] = 103;
+            if($prn->debug){
+            $resp["status"] = "Invalid Phone number"; }
+            $resp["errorCode"] = 103;
         }
     }else{
         if($prn->debug) {
-            $respjson["status"] = "SQL Connection error";
-            $respjson["SqlError"] = $conn->error;
+            $resp["status"] = "SQL Connection error";
+            $resp["SqlError"] = $conn->error;
         }
-        $respjson["errorCode"]=3;
+        $resp["errorCode"]=3;
     }
 }else{
-    $respjson["status"]="insufficient Data";
-    $respjson['missKey']=$prn->error;
-    $respjson["errorCode"]=2;
+    if($prn->debug){
+    $resp["status"]="insufficient Data";
+    $resp['missKey']=$prn->error;}
+    $resp["errorCode"]=2;
 }
 
-echo json_encode($respjson);
+echo json_encode($resp);

@@ -6,20 +6,20 @@ $respjson= array(
 
 );
 $keys=array("userid","password","repassword");
-$sk=new praveen();
-$password=$sk->safePost("password");
-$repassword=$sk->safePost("repassword");
-if($sk->checkPOST($keys)) {
+$prn=new praveen();
+$password=$prn->safePost("password");
+$repassword=$prn->safePost("repassword");
+if($prn->checkPOST($keys)) {
     if(strcmp($password,$repassword)==0){
-    $con=$sk->getConnection();
+    $con=$prn->getConnection();
     if($con) {
-        $userid = $sk->safePost("userid");
+        $userid = $prn->safePost("userid");
         $sql = "select password from registered_users where id='{$userid}' limit 1";
-        if ($result = $sk->query($sql)) {
+        if ($result = $prn->query($sql)) {
         $usercount = $result->num_rows;
         if ($usercount == 1) {
           $sql="update  hawabaaz.registered_users set password='{$password}' where id='{$userid}'";
-            $sk->query($sql);
+            $prn->query($sql);
             $respjson['errorCode']=0;
             $respjson['status']="success";
         } else {
@@ -49,7 +49,7 @@ if($sk->checkPOST($keys)) {
 }
 else{
     $respjson["status"]="insufficient Data";
-    $respjson["missKey"]=$sk->error;
+    $respjson["missKey"]=$prn->error;
     $respjson["errorCode"]=2;
 
 }

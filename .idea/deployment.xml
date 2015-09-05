@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="Hawabaaz" filePermissions="420" folderPermissions="493">
+  <component name="PublishConfigData" autoUpload="Always" serverName="hawabaaz server" filePermissions="420" folderPermissions="493">
+    <serverData>
+      <paths name="hawabaaz server">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/Hawabaaz-server" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
     <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>

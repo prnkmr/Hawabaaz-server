@@ -1,4 +1,5 @@
 <?php
+define("error","error");
 class config
 {
 
@@ -37,7 +38,8 @@ class config
             101 => "Already Registered",
             102 => "password mismatch",
             103 => "invalid phone number",
-            104 => "OTP Not Verified"
+            104 => "Password not set",
+            105 => "Password Already Set"
 
         );
 
