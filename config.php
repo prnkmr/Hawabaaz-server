@@ -33,10 +33,11 @@ class config
             4 => "Query Error",
             5 => "Autherntication Failure",
             6 => "Functional Error",
-            7 =>"OTP Not Verified",
+
             101 => "Already Registered",
             102 => "password mismatch",
-            103 => "invalid phone number"
+            103 => "invalid phone number",
+            104 => "OTP Not Verified"
 
         );
 

@@ -25,7 +25,7 @@ $con=$sk->getConnection();
 
                 }else{
                     $respjson["status"] = "OTP Not Verified";
-                    $respjson["errorCode"] = 7;
+                    $respjson["errorCode"] = 104;
 
                 }
 
@@ -41,7 +41,7 @@ $con=$sk->getConnection();
             $respjson["errorCode"] = 4;
         }
     }else{
-        echo "done";
+
         $respjson["status"] = "SQL Connection error";
         $respjson["SqlError"] = $conn->error;
         $respjson["errorCode"] = 3;
