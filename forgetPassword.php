@@ -17,10 +17,9 @@ if($prn->checkPOST($keys)){
                 $userCount = $result->num_rows;
                 if ($userCount == 0) {
                     $password=$prn->generateRandomString(8);
-                    if ($phone == "")
-                        $sql = "insert into hawabaaz.registered_users(email, password) values ('$email','$password')";
-                    else if ($email == "") $sql = "insert into hawabaaz.registered_users(email,password) values ('$phone','$password')";
-                    else $sql = "insert into hawabaaz.registered_users(phone, email, password) values ('$phone','$email','$password')";
+
+                        $sql = "update table hawabaaz.registered_users set password='$password' where phone='$username
+' or email='$username'";
                     $result = $prn->query($sql);
                     if ($result) {
                         if($prn->debug){
