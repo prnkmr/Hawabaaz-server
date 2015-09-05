@@ -53,5 +53,5 @@ $con=$sk->getConnection();
     $respjson["missKey"]=$sk->error;
     $respjson["errorCode"]=2;
 }
-echo json_encode($respjson);
+
 ?>
