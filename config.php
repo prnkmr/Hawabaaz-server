@@ -39,7 +39,8 @@ class config
             102 => "password mismatch",
             103 => "invalid phone number",
             104 => "Password not set",
-            105 => "Password Already Set"
+            105 => "Password Already Set",
+            106 => "username not found"
 
         );
 

@@ -11,15 +11,12 @@ if($prn->checkPOST($keys)){
     $conn=$prn->getConnection();
     if($conn){
         $username=$prn->safePost('username');
-
             $sql = "select (id) from registered_users where phone='$username' or email='$username' limit 1";
             if ($result = $prn->query($sql)) {
                 $userCount = $result->num_rows;
-                if ($userCount == 0) {
+                if ($userCount == 1) {
                     $password=$prn->generateRandomString(8);
-
-                        $sql = "update table hawabaaz.registered_users set password='$password' where phone='$username
-' or email='$username'";
+                        $sql = "update registered_users set password='$password' where (phone='$username' or email='$username') ";
                     $result = $prn->query($sql);
                     if ($result) {
                         if($prn->debug){
@@ -33,8 +30,8 @@ if($prn->checkPOST($keys)){
                     }
                 } else {
                     if($prn->debug){
-                        $resp["status"] = "Already registered"; }
-                    $resp["errorCode"] = 101;
+                        $resp["status"] = "Invalid Username"; }
+                    $resp["errorCode"] = 106;
                 }
             } else {
                 if($prn->debug){

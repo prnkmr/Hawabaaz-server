@@ -22,14 +22,11 @@ Test Page
 </form>
 
 <br/>
-<h4>Set password using otp</h4>
+<h4>Forget Password</h4>
 
-<form action="setPassword.php" method="post">
-    <input name="userId" type="text" placeholder="userid"/>
-    <input name="OTP" type="text" placeholder="OTP"/>
-    <input name="password" type="text" placeholder="password"/>
-    <input name="rePassword" type="text" placeholder="Retype"/>
-    <button type="submit">Set password</button>
+<form action="forgetPassword.php" method="post">
+    <input name="username" type="text" placeholder="username"/>
+    <button type="submit">Forget</button>
 </form>
 </body>
 </html>
