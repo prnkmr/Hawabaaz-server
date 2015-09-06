@@ -47,7 +47,7 @@ $con=$sk->getConnection();
 }else{
     if($sk->debug) {
         $respjson["status"] = "insufficient Data";
-        $respjson["missKey"] = $con->error;
+        $respjson["missKey"] = $sk->error;
     }
     $respjson["errorCode"]=2;
 
