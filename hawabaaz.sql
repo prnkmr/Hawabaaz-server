@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2015 at 01:44 PM
+-- Generation Time: Sep 06, 2015 at 09:42 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -71,27 +71,66 @@ INSERT INTO `available_recipies` (`id`, `location`, `name`, `details`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cancel_request`
+--
+
+CREATE TABLE IF NOT EXISTS `cancel_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ordered_items`
+--
+
+CREATE TABLE IF NOT EXISTS `ordered_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `item_count` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `ordered_items`
+--
+
+INSERT INTO `ordered_items` (`id`, `order_id`, `item_id`, `item_count`) VALUES
+(1, 8, 1, 3),
+(2, 8, 4, 1),
+(3, 8, 2, 54),
+(4, 8, 14, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_status` int(11) DEFAULT '0',
+  `user` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_status`) VALUES
-(1, 0),
-(2, 0),
-(3, 0),
-(4, 0),
-(5, 0),
-(6, 0),
-(7, 0);
+INSERT INTO `orders` (`id`, `order_status`, `user`) VALUES
+(1, 0, 0),
+(2, 0, 0),
+(3, 0, 0),
+(4, 0, 0),
+(5, 0, 0),
+(6, 0, 0),
+(7, 0, 0),
+(8, 0, 1),
+(9, 0, 1);
 
 -- --------------------------------------------------------
 
