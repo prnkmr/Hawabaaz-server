@@ -5,16 +5,16 @@ define("line","line");
 class config
 {
     public $debug=true;
-    public $onServer = false;
+    public $onServer = true;
     public $dbdetails, $errorCode,$appdata;
 
     function __construct()
     {
         if ($this->onServer) {
-            $dbURL = "";
-            $dbName = "";
-            $dbusername = "";
-            $dbpassword = "";
+            $dbURL = "hawabaaz.com";
+            $dbName = "hawabaaz_sql";
+            $dbusername = "hawabaaz_sql";
+            $dbpassword = "56903#";
         } else {
             $dbURL = "localhost";
             $dbName = "hawabaaz";
