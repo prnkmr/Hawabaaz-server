@@ -28,5 +28,14 @@ Test Page
     <input name="username" type="text" placeholder="username"/>
     <button type="submit">Forget</button>
 </form>
+
+<br/>
+<h4>Place Order</h4>
+
+<form action="placeOrder.php" method="post">
+    <input name="userId" type="text" placeholder="username"/>
+    <input name="orders" type="text" placeholder="orders json"/>
+    <button type="submit">place order</button>
+</form>
 </body>
 </html>

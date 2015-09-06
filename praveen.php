@@ -4,7 +4,6 @@ require_once('config.php');
 class praveen extends config
 {
     public $error;
-    public $debug=true;
     public $connection;
 
     function __construct()
@@ -18,7 +17,7 @@ class praveen extends config
     {
         foreach ($keys as $i) {
             if (!isset($_POST[$i])||$_POST[$i]=="") {
-                $this->error=$i." Required";
+                $this->error=$i;
                 return false;
             }
         }
@@ -29,7 +28,7 @@ class praveen extends config
     {
         foreach ($keys as $i) {
             if (!isset($_GET[$i])||$_GET[$i]=="") {
-                $this->error=$i." Required";
+                $this->error=$i;
                 return false;
             }
         }

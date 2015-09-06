@@ -2,7 +2,7 @@
 require_once("praveen.php");
 $respjson= array(
     "status"=>"unprocessed",
-    "errorCode"=>1
+    error=>1
 
 );
 $keys=array("userid","password","repassword");
@@ -20,29 +20,29 @@ if($prn->checkPOST($keys)) {
         if ($usercount == 1) {
           $sql="update  hawabaaz.registered_users set password='{$password}' where id='{$userid}'";
             $prn->query($sql);
-            $respjson['errorCode']=0;
+            $respjson[error]=0;
             $respjson['status']="success";
         } else {
             $respjson["status"] = "Authentication Failure";
-            $respjson["errorCode"] = 5;
+            $respjson[error] = 5;
 
         }
     }else{
 
             $respjson["status"] = "SQL querry error";
             $respjson["SqlError"] = $conn->error;
-            $respjson["errorCode"] = 4;
+            $respjson[error] = 4;
         }
 
     }else{
             $respjson["status"] = "SQL Connection error";
             $respjson["SqlError"] = $conn->error;
-            $respjson["errorCode"] = 3;
+            $respjson[error] = 3;
 
     }
 }else{
         $respjson["status"]="password mismatch";
-        $respjson["errorCode"]=102;
+        $respjson[error]=102;
 
 
     }
@@ -50,7 +50,7 @@ if($prn->checkPOST($keys)) {
 else{
     $respjson["status"]="insufficient Data";
     $respjson["missKey"]=$prn->error;
-    $respjson["errorCode"]=2;
+    $respjson[error]=2;
 
 }
 

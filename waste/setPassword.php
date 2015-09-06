@@ -2,7 +2,7 @@
 require_once("praveen.php");
 $resp= array(
     "status"=>"unprocessed",
-    "errorCode"=>1
+    error=>1
 );
 $keys=array("OTP","userId","password","rePassword");
 $prn=new praveen();
@@ -22,40 +22,40 @@ if($prn->checkPOST($keys)) {
                     if($row['verified']==0) {
                         $sql = "update  hawabaaz.registered_users set password='$password', temporary_password='', verified=1  where id='$userId' ";
                         if ($prn->query($sql)) {
-                            $resp['errorCode'] = 0;
+                            $resp[error] = 0;
                             if ($prn->debug) {
                                 $resp['status'] = "success";
                             }
                         } else {
-                            $resp['errorCode'] = 4;
+                            $resp[error] = 4;
                         }
                     }else{
-                        $resp['errorCode']=105;
+                        $resp[error]=105;
                     }
                 } else {
                     $resp["status"] = "Authentication Failure";
-                    $resp["errorCode"] = 5;
+                    $resp[error] = 5;
                 }
             } else {
                 if ($prn->debug) {
                 $resp["status"] = "SQL querry error";
                 $resp["SqlError"] = $conn->error;}
-                $resp["errorCode"] = 4;
+                $resp[error] = 4;
             }
         } else {
             if ($prn->debug) {
             $resp["status"] = "SQL Connection error";
             $resp["SqlError"] = $conn->error;}
-            $resp["errorCode"] = 3;
+            $resp[error] = 3;
         }
     }else{
-        $resp["errorCode"]=102;
+        $resp[error]=102;
     }
 }else{
     if ($prn->debug) {
     $resp["status"]="insufficient Data";
     $resp["missKey"]=$prn->error;}
-    $resp["errorCode"]=2;
+    $resp[error]=2;
 }
 
 echo json_encode($resp);

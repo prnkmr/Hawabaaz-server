@@ -3,7 +3,7 @@ require_once("praveen.php");
 $keys=array("username");
 $prn=new praveen();
 $resp= array(
-    "errorCode"=>1
+    error=>1
 );
 if($prn->debug){
     $resp["status"]="unprocessed"; }
@@ -21,23 +21,23 @@ if($prn->checkPOST($keys)){
                     if ($result) {
                         if($prn->debug){
                             $resp["status"] = "Success";}
-                        $resp["errorCode"] = 0;
+                        $resp[error] = 0;
                     } else {
                         if($prn->debug){
                             $resp["status"] = "SQL error";
                             $resp["SqlError"] = $conn->error; }
-                        $resp["errorCode"] = 4;
+                        $resp[error] = 4;
                     }
                 } else {
                     if($prn->debug){
                         $resp["status"] = "Invalid Username"; }
-                    $resp["errorCode"] = 106;
+                    $resp[error] = 106;
                 }
             } else {
                 if($prn->debug){
                     $resp["status"] = "SQL error";
                     $resp["SqlError"] = $conn->error;}
-                $resp["errorCode"] = 4;
+                $resp[error] = 4;
             }
 
 
@@ -46,13 +46,13 @@ if($prn->checkPOST($keys)){
             $resp["status"] = "SQL Connection error";
             $resp["SqlError"] = $conn->error;
         }
-        $resp["errorCode"]=3;
+        $resp[error]=3;
     }
 }else{
     if($prn->debug){
         $resp["status"]="insufficient Data";
         $resp['missKey']=$prn->error;}
-    $resp["errorCode"]=2;
+    $resp[error]=2;
 }
 
 echo json_encode($resp);

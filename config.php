@@ -1,8 +1,10 @@
 <?php
 define("error","error");
+define("status","status");
+define("line","line");
 class config
 {
-
+    public $debug=true;
     public $onServer = false;
     public $dbdetails, $errorCode,$appdata;
 
@@ -33,7 +35,7 @@ class config
             3 => "DB Connectivity Error",
             4 => "Query Error",
             5 => "Autherntication Failure",
-            6 => "Functional Error",
+            6 => "json decode error",
 
             101 => "Already Registered",
             102 => "password mismatch",

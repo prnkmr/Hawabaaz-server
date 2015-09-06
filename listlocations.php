@@ -2,7 +2,7 @@
 require_once("praveen.php");
 $respjson= array(
     "status"=>"unprocessed",
-    "errorCode"=>1
+    error=>1
 );
 $sk=new praveen();
 $con=$sk->getConnection();
@@ -15,7 +15,7 @@ $sql="select id,name from hawabaaz.available_locations";
          $respjson["list"][]=$entry;
 
      }
-     $respjson['errorCode']=0;
+     $respjson[error]=0;
      if($sk->debug) {
          $respjson['status'] = "success";
      }
@@ -24,7 +24,7 @@ $sql="select id,name from hawabaaz.available_locations";
          $respjson["status"] = "SQL querry error";
          $respjson["SqlError"] = $con->error;
  }
-     $respjson["errorCode"] = 4;
+     $respjson[error] = 4;
  }
 
 
@@ -33,7 +33,7 @@ $sql="select id,name from hawabaaz.available_locations";
     $respjson["status"] = "SQL Connection error";
     $respjson["SqlError"] = $con->error;
     }
-    $respjson["errorCode"] = 3;
+    $respjson[error] = 3;
 
 }
 echo json_encode($respjson);

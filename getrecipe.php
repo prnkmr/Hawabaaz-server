@@ -2,7 +2,7 @@
 require_once("praveen.php");
 $respjson= array(
     "status"=>"unprocessed",
-    "errorCode"=>1
+    error=>1
 );
 $keys=array("locationid");
 $sk = new praveen();
@@ -21,7 +21,7 @@ $con=$sk->getConnection();
                 $respjson["list"][]=$entry;
 
             }
-            $respjson['errorCode']=0;
+            $respjson[error]=0;
             if($sk->debug) {
                 $respjson['status'] = "success";
             }
@@ -31,7 +31,7 @@ $con=$sk->getConnection();
                 $resp["status"] = "SQL error";
                 $resp["SqlError"] = $con->error;
             }
-            $resp["errorCode"] = 4;
+            $resp[error] = 4;
         }
 
 
@@ -41,7 +41,7 @@ $con=$sk->getConnection();
             $respjson["status"] = "SQL Connection error";
             $respjson["SqlError"] = $con->error;
         }
-        $respjson["errorCode"] = 3;
+        $respjson[error] = 3;
     }
 
 }else{
@@ -49,7 +49,7 @@ $con=$sk->getConnection();
         $respjson["status"] = "insufficient Data";
         $respjson["missKey"] = $sk->error;
     }
-    $respjson["errorCode"]=2;
+    $respjson[error]=2;
 
 }
 echo json_encode($respjson);

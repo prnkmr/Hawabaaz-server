@@ -3,7 +3,7 @@ require_once("praveen.php");
 
 $resp= array(
     "status"=>"unprocessed",
-    "errorCode"=>1
+    error=>1
 
 );
 $keys=array("username","password");
@@ -20,26 +20,26 @@ $con=$prn->getConnection();
                 $row=$result->fetch_array();
                     $resp['userid']= $row['id'];
                     $resp["status"] = "success";
-                    $resp["errorCode"] = 0;
+                    $resp[error] = 0;
             }else{
                 $resp["status"] = "Authentication Failure";
-                $resp["errorCode"] = 5;
+                $resp[error] = 5;
             }
         }else{
             $resp["status"] = "SQL error";
             $resp["SqlError"] = $conn->error;
-            $resp["errorCode"] = 4;
+            $resp[error] = 4;
         }
     }else{
 
         $resp["status"] = "SQL Connection error";
         $resp["SqlError"] = $conn->error;
-        $resp["errorCode"] = 3;
+        $resp[error] = 3;
     }
 }else{
     $resp["status"]="insufficient Data";
     $resp["missKey"]=$prn->error;
-    $resp["errorCode"]=2;
+    $resp[error]=2;
 }
 
 echo json_encode($resp);
