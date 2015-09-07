@@ -66,3 +66,4 @@ if($prn->checkPOST($keys)){
 }
 
 echo json_encode($resp);
+?>
