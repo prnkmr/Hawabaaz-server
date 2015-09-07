@@ -5,7 +5,7 @@ define("line","line");
 class config
 {
     public $debug=true;
-    public $onServer = true;
+    public $onServer = false;
     public $dbdetails, $errorCode,$appdata;
 
     function __construct()

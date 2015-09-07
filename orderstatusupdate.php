@@ -7,7 +7,7 @@ $respjson= array(
 $keys=array("orderid","orderstatus");
 $sk = new praveen();
 if($sk->checkPOST($keys)) {
-$con = new praveen();
+$con = $sk->getConnection();
  if($con){
      $orderid=$sk->safePost("orderid");
      $orderstatus=$sk->safePost("orderstatus");
@@ -41,5 +41,5 @@ $con = new praveen();
     }
     $respjson["errorCode"]=2;
 }
-
+echo json_encode($respjson);
 ?>

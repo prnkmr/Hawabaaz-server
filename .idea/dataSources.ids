@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - hawabaaz_sql@hawabaaz.com" uuid="05b7bad5-614d-4f27-9c38-2a73f34ee889">
-    <database-info product="MySQL" version="5.5.42-cll" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+  <data-source name="MySQL - hawabaaz@localhost" uuid="8822ecfd-5391-411d-9677-4bb0f9bb1fc0">
+    <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
     </database-info>
-    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
-    <schema name="" catalog="hawabaaz_sql"/>
-    <table name="available_locations" schema="" catalog="hawabaaz_sql" type="TABLE">
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="hawabaaz"/>
+    <table name="available_locations" schema="" catalog="hawabaaz" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="name" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="details" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="available_recipies" schema="" catalog="hawabaaz_sql" type="TABLE">
+    <table name="available_recipies" schema="" catalog="hawabaaz" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="location" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="name" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="details" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="cancel_request" schema="" catalog="hawabaaz_sql" type="TABLE">
+    <table name="cancel_request" schema="" catalog="hawabaaz" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="order_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="ordered_items" schema="" catalog="hawabaaz_sql" type="TABLE">
+    <table name="ordered_items" schema="" catalog="hawabaaz" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="order_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="item_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="item_count" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="orders" schema="" catalog="hawabaaz_sql" type="TABLE">
+    <table name="orders" schema="" catalog="hawabaaz" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="order_status" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="registered_users" schema="" catalog="hawabaaz_sql" type="TABLE">
+    <table name="registered_users" schema="" catalog="hawabaaz" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="phone" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <column name="email" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
