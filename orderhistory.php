@@ -4,20 +4,18 @@ $respjson= array(
     "status"=>"unprocessed",
     error=>1
 );
-$keys=array("locationid");
+$keys=array("userid");
 $sk = new praveen();
-if($sk->checkPOST($keys)){
+if($sk->checkPOST($keys)) {
 
-$con=$sk->getConnection();
+    $con=$sk->getConnection();
     if($con){
-     $locationid=$sk->safePost("locationid");
-        $sql="select id,name from hawabaaz.available_recipies where location='{$locationid}'";
+        $userid=$sk->safePost("userid");
+        $sql="select id,order_status from hawabaaz.orders where user='{$userid}'";
         if($result=$sk->query($sql)){
-
-
             $respjson["list"]=array();
             while($row=$result->fetch_array()){
-                $entry=array($row['id'],$row['name']);
+                $entry=array($row['id'],$row['order_status']);
                 $respjson["list"][]=$entry;
 
             }
@@ -33,7 +31,6 @@ $con=$sk->getConnection();
             }
             $resp["error"] = 4;
         }
-
 
     }else{
 
@@ -52,5 +49,6 @@ $con=$sk->getConnection();
     $respjson["error"]=2;
 
 }
+
 echo json_encode($respjson);
 ?>
