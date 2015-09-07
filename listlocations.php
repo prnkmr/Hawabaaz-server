@@ -7,7 +7,7 @@ $respjson= array(
 $sk=new praveen();
 $con=$sk->getConnection();
 if($con){
-$sql="select id,name from hawabaaz.available_locations";
+$sql="select id,name from available_locations";
  if($result=$sk->query($sql)){
    $respjson["list"]=array();
      while($row=$result->fetch_array()){

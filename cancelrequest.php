@@ -11,7 +11,7 @@ $con=$sk->getConnection();
     if($con){
      $orderid=$sk->safePost("orderid");
         echo $orderid;
-        $sql="insert into hawabaaz.cancel_request (order_id) values ('{$orderid}')";
+        $sql="insert into cancel_request (order_id) values ('{$orderid}')";
         if($result=$sk->query($sql)){
             $respjson['errorCode']=0;
             if($sk->debug) {

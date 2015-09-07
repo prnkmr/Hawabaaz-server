@@ -10,7 +10,7 @@ if($sk->checkPOST($keys)) {
     $con=$sk->getConnection();
     if($con) {
         $orderid = $sk->safePost("orderid");
-        $sql="select id,item_id,item_count from hawabaaz.ordered_items where order_id='{$orderid}'";
+        $sql="select id,item_id,item_count from ordered_items where order_id='{$orderid}'";
         if($result=$sk->query($sql)){
 
 

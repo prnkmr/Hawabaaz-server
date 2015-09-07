@@ -11,7 +11,7 @@ if($sk->checkPOST($keys)){
 $con=$sk->getConnection();
     if($con){
      $locationid=$sk->safePost("locationid");
-        $sql="select id,name from hawabaaz.available_recipies where location='{$locationid}'";
+        $sql="select id,name from available_recipies where location='{$locationid}'";
         if($result=$sk->query($sql)){
 
 

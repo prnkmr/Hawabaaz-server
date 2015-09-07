@@ -11,7 +11,7 @@ if($sk->checkPOST($keys)) {
     $con=$sk->getConnection();
     if($con){
         $userid=$sk->safePost("userid");
-        $sql="select id,order_status from hawabaaz.orders where user='{$userid}'";
+        $sql="select id,order_status from orders where user='{$userid}'";
         if($result=$sk->query($sql)){
             $respjson["list"]=array();
             while($row=$result->fetch_array()){

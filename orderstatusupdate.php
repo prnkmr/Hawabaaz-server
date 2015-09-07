@@ -11,7 +11,7 @@ $con = $sk->getConnection();
  if($con){
      $orderid=$sk->safePost("orderid");
      $orderstatus=$sk->safePost("orderstatus");
- $sql="update hawabaaz.orders set order_status='{$orderstatus}' where id='{$orderid}'";
+ $sql="update orders set order_status='{$orderstatus}' where id='{$orderid}'";
 
      if($result=$sk->query($sql)){
      $respjson['errorCode']=0;
