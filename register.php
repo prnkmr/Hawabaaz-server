@@ -20,9 +20,9 @@ if($prn->checkPOST($keys)){
                     if ($userCount == 0) {
                         $password=$prn->generateRandomString(8);
                         if ($phone == "")
-                            $sql = "insert into hawabaaz.registered_users(email, password) values ('$email','$password')";
-                        else if ($email == "") $sql = "insert into hawabaaz.registered_users(email,password) values ('$phone','$password')";
-                        else $sql = "insert into hawabaaz.registered_users(phone, email, password) values ('$phone','$email','$password')";
+                            $sql = "insert into registered_users(email, password) values ('$email','$password')";
+                        else if ($email == "") $sql = "insert into registered_users(email,password) values ('$phone','$password')";
+                        else $sql = "insert into registered_users(phone, email, password) values ('$phone','$email','$password')";
                         $result = $prn->query($sql);
                         if ($result) {
                             if($prn->debug){
