@@ -38,6 +38,14 @@
       <column name="user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
+    <table name="ratings" schema="" catalog="hawabaaz" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="recipe_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="rating" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="user" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="comment" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="registered_users" schema="" catalog="hawabaaz" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="phone" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
