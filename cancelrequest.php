@@ -1,45 +1,14 @@
 <?php
 require_once("praveen.php");
-$respjson= array(
-    "status"=>"unprocessed",
-    "errorCode"=>1
-);
+$app=new praveen();
 $keys=array("orderid");
-$sk = new praveen();
-if($sk->checkPOST($keys)) {
-$con=$sk->getConnection();
-    if($con){
-     $orderid=$sk->safePost("orderid");
-        echo $orderid;
-        $sql="insert into cancel_request (order_id) values ('{$orderid}')";
-        if($result=$sk->query($sql)){
-            $respjson['errorCode']=0;
-            if($sk->debug) {
-                $respjson['status'] = "success";
-            }}else {
-            if($sk->debug){
-                $respjson["status"] = "SQL querry error";
-                $respjson["SqlError"] = $con->error;
-            }
-            $respjson["errorCode"] = 4;
-        }
-
-
-    }else{
-
-        if($sk->debug){
-            $respjson["status"] = "SQL Connection error";
-            $respjson["SqlError"] = $con->error;
-        }
-        $respjson["errorCode"] = 3;
-    }
-
-}else{
-    if($sk->debug) {
-        $respjson["status"] = "insufficient Data";
-        $respjson["missKey"] = $sk->error;
-    }
-    $respjson["errorCode"]=2;
+$app->checkPOST($keys);
+$orderid=$app->escapedPost($keys[0]);
+$sql="insert into cancel_request (order_id) values ('{$orderid}')";
+$app->query($sql);
+$resp[error]=0;
+if(debug) {
+    $resp['status'] = "success";
 }
-echo json_encode($respjson);
+echo json_encode($resp);
 ?>

@@ -1,45 +1,18 @@
 <?php
 require_once("praveen.php");
-$respjson= array(
-    "status"=>"unprocessed",
-    "errorCode"=>1
-);
+$app=new praveen();
 $keys=array("orderid","orderstatus");
-$sk = new praveen();
-if($sk->checkPOST($keys)) {
-$con = $sk->getConnection();
- if($con){
-     $orderid=$sk->safePost("orderid");
-     $orderstatus=$sk->safePost("orderstatus");
- $sql="update orders set order_status='{$orderstatus}' where id='{$orderid}'";
-
-     if($result=$sk->query($sql)){
-     $respjson['errorCode']=0;
-     if($sk->debug) {
-         $respjson['status'] = "success";
-     }}else {
-         if($sk->debug){
-             $respjson["status"] = "SQL querry error";
-             $respjson["SqlError"] = $con->error;
-         }
-         $respjson["errorCode"] = 4;
-     }
- }   else{
-
-     if($sk->debug){
-         $respjson["status"] = "SQL Connection error";
-         $respjson["SqlError"] = $con->error;
-     }
-     $respjson["errorCode"] = 3;
- }
-
-
-}else{
-    if($sk->debug) {
-        $respjson["status"] = "insufficient Data";
-        $respjson["missKey"] = $sk->error;
-    }
-    $respjson["errorCode"]=2;
+$app->checkPOST($keys);
+$orderid=$app->escapedPost($keys[0]);
+$orderstatus=$app->escapedPost($keys[1]);
+$sql="update orders set order_status='{$orderstatus}' where id='{$orderid}'";
+$app->query($sql);
+$resp[error]=0;
+if(debug) {
+    $resp['status'] = "success";
 }
-echo json_encode($respjson);
+echo json_encode($resp);
+
+
+
 ?>
