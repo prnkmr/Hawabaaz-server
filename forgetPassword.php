@@ -2,7 +2,7 @@
 require_once("praveen.php");
 $app=new praveen();
 $keys=array("username");
-$prn->checkPOST($keys);
+$app->checkPOST($keys);
 
 $username=$prn->safePost('username');
 $sql = "select (id) from registered_users where phone='$username' or email='$username' limit 1";
