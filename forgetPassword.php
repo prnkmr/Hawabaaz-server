@@ -15,12 +15,10 @@ $userCount = $result->num_rows;
         if(debug){
             $resp["status"] = "Success";}
         $resp[error] = 0;
-
     } else {
         if(debug)
             $resp["status"] = "Invalid Username";
         $resp[error] = 106;
     }
 echo json_encode($resp);
-
 ?>
