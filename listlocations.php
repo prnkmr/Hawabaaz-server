@@ -1,15 +1,11 @@
 <?php
 require_once("praveen.php");
-$respjson= array(
-    "status"=>"unprocessed",
-    error=>1
-);
-$sk=new praveen();
-$con=$sk->getConnection();
-if($con){
-$sql="select id,name from available_locations";
- if($result=$sk->query($sql)){
-   $respjson["list"]=array();
+$app=new praveen();
+if(debug)$respjson[status]="unprocessed";
+$con=$app->getConnection();
+$sql="select id,name from hawabaaz.available_locations";
+ $result=$app->query($sql);
+   $resp["list"]=array();
      while($row=$result->fetch_array()){
          $entry=array($row['id'],$row['name']);
          $respjson["list"][]=$entry;

@@ -7,7 +7,7 @@ if($onServer) {
     $dbusername = "";
     $dbpassword = "";
 }else{
-    $dbURL = "localhost";
+    $dbURL = "localhoost";
     $dbName = "hawabaaz";
     $dbusername = "root";
     $dbpassword = "";

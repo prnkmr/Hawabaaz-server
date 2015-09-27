@@ -2,9 +2,9 @@
 define("error","error");
 define("status","status");
 define("line","line");
+define("debug",true);
 class config
 {
-    public $debug=true;
     public $onServer = false;
     public $dbdetails, $errorCode,$appdata;
 
@@ -45,6 +45,7 @@ class config
             106 => "username not found"
 
         );
+
 
         $this->appdata = array(
 

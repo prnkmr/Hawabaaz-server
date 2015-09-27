@@ -1,6 +1,12 @@
 <?php
 require_once('config.php');
 
+$resp=array(
+    error=>1
+);
+if(debug)$resp[status]='unprocessed';
+
+
 class praveen extends config
 {
     public $error;
@@ -10,15 +16,29 @@ class praveen extends config
     {
         parent::__construct();
         $this->dbdetails;
-        $this->connection = mysqli_connect($this->dbdetails['url'], $this->dbdetails['username'], $this->dbdetails['password'],$this->dbdetails['name']) ;
+        $this->connection = mysqli_connect($this->dbdetails['url'], $this->dbdetails['username'], $this->dbdetails['password'],$this->dbdetails['name']);
+        if(!$this->connection) {
+            $badResp=array(
+                error => 3
+            );
+            if(debug)
+            $badResp[status]='DB Connectivity Error';
+
+            die(json_encode($badResp));
+        }
+
     }
 
     function checkPOST($keys)
     {
         foreach ($keys as $i) {
             if (!isset($_POST[$i])||$_POST[$i]=="") {
-                $this->error=$i;
-                return false;
+                $badResp=array(
+                    error=>2
+                );
+                if(debug)
+                    $badResp[status]="post key '".$i."' required";
+                die(json_encode($badResp));
             }
         }
         return true;
@@ -28,8 +48,12 @@ class praveen extends config
     {
         foreach ($keys as $i) {
             if (!isset($_GET[$i])||$_GET[$i]=="") {
-                $this->error=$i;
-                return false;
+                $badResp=array(
+                    error=>2
+                );
+                if(debug)
+                    $badResp[status]="get key '".$i."' required";
+                die(json_encode($badResp));
             }
         }
         return true;
@@ -42,20 +66,33 @@ class praveen extends config
     function query($sql)
     {
 
-        return $this->connection->query($sql);
+         $toReturn=$this->connection->query($sql);
+        if($toReturn) return $toReturn;
+        else{
+            $badResp=array(
+                error=>3
+            );
+
+            if(debug){
+                $badResp[status]="SQL Query Error";
+                $badResp['sqlError']=$this->connection->error;
+            }
+            die(json_encode($badResp));
+        }
+
     }
 
-    protected function safeString($connection, $string)
+    protected function safeString($string)
     {
-        return mysqli_real_escape_string($connection, $string);
+        return mysqli_real_escape_string($this->connection, $string);
     }
 
-    public function safePost($string)
+    public function escapedPost($string)
     {
         return $this->safeString($this->connection,$_POST[$string]);
     }
 
-    public function safeGet($string){
+    public function escapedGet($string){
         return $this->safeString($this->connection,$_GET[$string]);
     }
 
