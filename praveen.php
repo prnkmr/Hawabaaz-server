@@ -82,18 +82,18 @@ class praveen extends config
 
     }
 
-    protected function safeString($string)
+    protected function escapedString($string)
     {
         return mysqli_real_escape_string($this->connection, $string);
     }
 
-    public function escapedPost($string)
+    public function escapedPost($key)
     {
-        return $this->safeString($this->connection,$_POST[$string]);
+        return $this->escapedString($_POST[$key]);
     }
 
-    public function escapedGet($string){
-        return $this->safeString($this->connection,$_GET[$string]);
+    public function escapedGet($key){
+        return $this->escapedString($_GET[$key]);
     }
 
     function generateRandomString($length=6){
