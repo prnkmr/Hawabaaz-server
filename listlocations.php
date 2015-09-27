@@ -1,8 +1,6 @@
 <?php
 require_once("praveen.php");
 $app=new praveen();
-if(debug)$resp[status]="unprocessed";
-$con=$app->getConnection();
 $sql="select id,name from hawabaaz.available_locations";
  $result=$app->query($sql);
    $resp["list"]=array();
@@ -12,7 +10,7 @@ $sql="select id,name from hawabaaz.available_locations";
 
      }
      $resp[error]=0;
-     if($sk->debug) {
+     if(debug) {
          $resp['status'] = "success";
      }
 echo json_encode($resp);
