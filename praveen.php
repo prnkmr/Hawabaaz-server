@@ -82,6 +82,22 @@ class praveen extends config
 
     }
 
+    function multiQuery($sql){
+        $toReturn=$this->connection->multi_query($sql);
+        if($toReturn) return $toReturn;
+        else{
+            $badResp=array(
+                error=>3
+            );
+
+            if(debug){
+                $badResp[status]="SQL Query Error";
+                $badResp['sqlError']=$this->connection->error;
+            }
+            die(json_encode($badResp));
+        }
+    }
+
     protected function escapedString($string)
     {
         return mysqli_real_escape_string($this->connection, $string);
