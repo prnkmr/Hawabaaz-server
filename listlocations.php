@@ -1,7 +1,7 @@
 <?php
 require_once("praveen.php");
 $app=new praveen();
-$sql="select id,name from hawabaaz.available_locations";
+$sql="select id,name from available_locations";
  $result=$app->query($sql);
    $resp["list"]=array();
      while($row=$result->fetch_array()){
